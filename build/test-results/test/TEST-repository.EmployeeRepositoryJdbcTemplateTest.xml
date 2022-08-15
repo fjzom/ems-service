@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="repository.EmployeeRepositoryJdbcTemplateTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-07-26T03:32:26" hostname="C02FP4YZMD6PMBP" time="0.122">
+  <properties/>
+  <testcase name="validate findAll method " classname="repository.EmployeeRepositoryJdbcTemplateTest" time="0.015"/>
+  <testcase name="validate findById " classname="repository.EmployeeRepositoryJdbcTemplateTest" time="0.002"/>
+  <testcase name="validate insert employee  " classname="repository.EmployeeRepositoryJdbcTemplateTest" time="0.098"/>
+  <testcase name="validate edit employee  " classname="repository.EmployeeRepositoryJdbcTemplateTest" time="0.001"/>
+  <testcase name="validate patch employee  " classname="repository.EmployeeRepositoryJdbcTemplateTest" time="0.002"/>
+  <testcase name="validate delete employee  " classname="repository.EmployeeRepositoryJdbcTemplateTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

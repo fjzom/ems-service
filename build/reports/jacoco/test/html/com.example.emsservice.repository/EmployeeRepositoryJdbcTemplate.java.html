@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EmployeeRepositoryJdbcTemplate.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">EMS-service</a> &gt; <a href="index.source.html" class="el_package">com.example.emsservice.repository</a> &gt; <span class="el_source">EmployeeRepositoryJdbcTemplate.java</span></div><h1>EmployeeRepositoryJdbcTemplate.java</h1><pre class="source lang-java linenums">package com.example.emsservice.repository;
+
+import com.example.emsservice.domain.Employee;
+import com.example.emsservice.repository.Mapper.EmployeeMapper;
+import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+
+@Repository
+<span class="fc" id="L15">@RequiredArgsConstructor</span>
+public class EmployeeRepositoryJdbcTemplate {
+
+    private final NamedParameterJdbcTemplate jdbcTemplate;
+    private final EmployeeMapper mapper;
+
+    public static final String SELECT_EMPLOYEES = &quot;SELECT * FROM EMPLOYEE  e JOIN EMPLOYEE_SALARY  es ON e.EMPLOYEE_SALARY_FK = es.SALARY_ID;&quot;;
+    public static final String SELECT_EMPLOYEE = &quot;SELECT * FROM EMPLOYEE WHERE EMPLOYEE_ID = %s;&quot;;
+    public static final String INSERT_EMPLOYEE = &quot;INSERT INTO EMPLOYEE (employee_id, address, emp_name, height, weight, employee_salary_fk) &quot; +
+            &quot;VALUES(:employeeId,:address, :empName,:height,:weight, :employeeSalary);&quot;;
+    public static final String UPDATE_EMPLOYEE = &quot;UPDATE EMPLOYEE SET ADDRESS = :address, EMP_NAME = :empName, HEIGHT = :height, WEIGHT = :weight, EMPLOYEE_SALARY_FK = :employeeSalary WHERE EMPLOYEE_ID = %s;&quot;;
+
+    public static final String PATCH_EMPLOYEE = &quot;UPDATE EMPLOYEE SET ADDRESS = :address, WEIGHT = :weight, WHERE EMPLOYEE_ID = :id;&quot;;
+
+    public static final String DELETE_EMPLOYEE = &quot;DELETE  FROM EMPLOYEE WHERE EMPLOYEE_ID = :id;&quot;;
+
+    public List&lt;Employee&gt; findAll() {
+<span class="fc" id="L32">        return jdbcTemplate.query(SELECT_EMPLOYEES, mapper);</span>
+    }
+
+
+    public Employee findById(final String id) {
+<span class="fc" id="L37">        List&lt;Employee&gt; employees = jdbcTemplate.query(String.format(SELECT_EMPLOYEE, id), mapper);</span>
+<span class="fc" id="L38">        return  employees.stream().findFirst().get();</span>
+    }
+
+    public Integer save(final Employee emp){
+<span class="fc" id="L42">        Integer insertNumber =   jdbcTemplate.update(INSERT_EMPLOYEE,new BeanPropertySqlParameterSource(emp));</span>
+<span class="fc" id="L43">        return insertNumber;</span>
+    }
+    public Integer save(final String id, final Employee emp){
+<span class="fc" id="L46">        Integer editNumber = jdbcTemplate.update(String.format(UPDATE_EMPLOYEE, id),new BeanPropertySqlParameterSource(emp));</span>
+<span class="fc" id="L47">        return editNumber;</span>
+    }
+    public Integer save(final String id, final Double weight, final String address){
+<span class="fc" id="L50">        Integer patchNumber = jdbcTemplate.update(PATCH_EMPLOYEE,new MapSqlParameterSource()</span>
+<span class="fc" id="L51">                .addValue(&quot;employeeId&quot;, id)</span>
+<span class="fc" id="L52">                .addValue(&quot;weight&quot;, weight)</span>
+<span class="fc" id="L53">                .addValue(&quot;address&quot;, address));</span>
+<span class="fc" id="L54">        return patchNumber;</span>
+    }
+
+    public Integer delete(final String id){
+<span class="fc" id="L58">        Integer deleteNumber = jdbcTemplate.update(DELETE_EMPLOYEE, new MapSqlParameterSource()</span>
+<span class="fc" id="L59">                .addValue(&quot;id&quot;, id));</span>
+<span class="fc" id="L60">        return deleteNumber;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

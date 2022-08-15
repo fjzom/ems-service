@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="controller.EmployeeManagementSystemControllerTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-07-26T03:32:26" hostname="C02FP4YZMD6PMBP" time="0.112">
+  <properties/>
+  <testcase name="validate getAllEmployee method" classname="controller.EmployeeManagementSystemControllerTest" time="0.07"/>
+  <testcase name="validate getEmployee method" classname="controller.EmployeeManagementSystemControllerTest" time="0.004"/>
+  <testcase name="validate addEmployee method" classname="controller.EmployeeManagementSystemControllerTest" time="0.022"/>
+  <testcase name="validate editEmployees method" classname="controller.EmployeeManagementSystemControllerTest" time="0.004"/>
+  <testcase name="validate patchEmployees method" classname="controller.EmployeeManagementSystemControllerTest" time="0.005"/>
+  <testcase name="validate deleteEmployees method" classname="controller.EmployeeManagementSystemControllerTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
